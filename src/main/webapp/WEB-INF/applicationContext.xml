@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+    
+    <!-- 配置velocity引擎 -->
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/templates" />
+		<property name="configLocation" value="/WEB-INF/velocity.properties" />
+        <property name="velocityProperties">
+            <props>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
+                <prop key="directive.foreach.iterator.name">loopHasNext</prop>
+	            <prop key="input.encoding">utf-8</prop>
+	            <prop key="output.encoding">utf-8</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- 设置 Layout -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="false" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".vm" />
+        <property name="layoutUrl" value="/layout/default.vm" /><!-- layout 文件 -->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+
+        <!-- 以下是导入一些工具、对象到 vm 模板中  -->
+        <property name="exposeSpringMacroHelpers" value="true" /><!-- spring 工具 -->
+        <property name="exposeRequestAttributes" value="true" /><!-- $request 对象 -->
+        <property name="exposeSessionAttributes" value="true" /><!-- $session 对象 -->
+
+        <!--<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml" />--><!-- toolbox配置文件路径 -->
+    </bean>
+</beans>

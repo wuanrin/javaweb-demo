@@ -1,0 +1,2 @@
+#set($layout = "/layout/default.vm")
+<h1>Hello gaga!</h1>
