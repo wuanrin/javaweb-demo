@@ -11,4 +11,20 @@
 	<context:component-scan base-package="me.anrin.controller" /><!-- 查找 Controller -->
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
+	
+	<!-- 用于转换 json 格式 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
 </beans>
