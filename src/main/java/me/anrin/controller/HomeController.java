@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,10 +20,17 @@ public class HomeController {
 		return "index";
 	}
 
+	// 定义请求类型
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detail(Model model) { 
 		model.addAttribute("name", "Michael Jordan");
 		return "detail";
+	}
+
+	// 活动地址
+	@RequestMapping("/{address}")
+	public String active(@PathVariable String address) {
+		return address;
 	}
 
 	// 返回 josn 格式
